@@ -1,6 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import { CardDeck } from "shards-react";
 
 import UserCard from './components/UserCard.js';
 
@@ -46,18 +47,20 @@ class App extends React.Component {
   render() {return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <div className="cardContainer">
-          {this.state.user.map(user => {
-            return <UserCard key={user.html_url} user={user} />
-          })}
-        </div>
-        
+        <h1 id="header">Shadowborn's followers</h1>
       </header>
+      <CardDeck>
+
+        {this.state.user.map(user => {
+          return <UserCard key={user.id} user={user} />
+        })}
+
+      </CardDeck>
     </div>
     );
   }
+
+
 }
 
 export default App;

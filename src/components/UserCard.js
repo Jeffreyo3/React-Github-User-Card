@@ -1,19 +1,30 @@
 import React from 'react';
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardImg,
+    CardBody,
+    Button
+  } from "shards-react";
 
+  
 
 
 function UserCard(props) {
     return (
-      <div className="user-card">
-        <img src={props.user.avatar_url} />
-        <div className="userCard-body">
-          <h1>{props.user.login}</h1>
-          <p>{props.user.bio}</p>
-          <a href={props.user.html_url}>
-            Read More
-          </a>
-        </div>
-      </div>
+        <Card className="user-card" style={{width: '250px', flex: 'auto'}}>
+            <CardHeader>
+                <CardTitle>{props.user.login}</CardTitle>
+            </CardHeader>
+            <CardImg src={props.user.avatar_url}/>
+            <CardBody className="userCard-body">
+            <p>{props.user.bio}</p>
+            <Button href={props.user.html_url} target="_blank">
+                View GitHub Profile
+            </Button>
+            </CardBody>
+        </Card>
     );
   }
   
