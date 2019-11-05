@@ -9,9 +9,9 @@ function UserCard(props) {
         <div className="userCard-body">
           <h1>{props.user.login}</h1>
           <p>{props.user.bio}</p>
-          <button href={props.user.html_url}>
-            Read more &rarr;
-          </button>
+          <a href={props.user.html_url}>
+            Read More
+          </a>
         </div>
       </div>
     );
