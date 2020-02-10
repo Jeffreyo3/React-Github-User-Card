@@ -10,53 +10,54 @@ class App extends React.Component {
     console.log('Constructor Invoked!');
     super();
     this.state = {
-      user: ["Hello World"]
+      followers: ["Hello Friends"]
     };
   }
 
   componentDidMount() {
+    // fetch followers data
     fetch('https://api.github.com/users/Shadowborn/followers')
       .then(response => {
-        console.log(response, 'response');
+        console.log(response, 'Followers response');
         return response.json();
       })
-      .then(response => {
-        this.setState( { user: response });
+      .then(followers => {
+        console.log(followers, '2nd then Followers response')
+        this.setState({ followers: followers });
       })
       .catch(error => {
         console.log(error);
       });
 
-      fetch('https://api.github.com/users/Shadowborn')
-        .then(response => {
-          
-          return response.json();
-        })
-        .then(response => {
-          this.state.user.push(response);
-          this.setState({ user: this.state.user });
-          console.log(this.state.user, 'thisStateUser');
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    // fetch user data
+    fetch('https://api.github.com/users/Shadowborn')
+      .then(response => {
+        console.log(response, 'User response')
+        return response.json();
+      })
+      .then(user => {
+        const current = this.state.followers
+        this.setState({ followers: [user, ...current] })
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
 
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1 id="header">Shadowborn's followers</h1>
+        </header>
 
-  render() {return (
-    <div className="App">
-      <header className="App-header">
-        <h1 id="header">Shadowborn's followers</h1>
-      </header>
-      <CardDeck>
-
-        {this.state.user.map(user => {
-          return <UserCard key={user.id} user={user} />
-        })}
-
-      </CardDeck>
-    </div>
+        <CardDeck>
+          {this.state.followers.map(user => {
+            return <UserCard key={user.id} user={user} />
+          })}
+        </CardDeck>
+      </div>
     );
   }
 
