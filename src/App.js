@@ -10,34 +10,32 @@ class App extends React.Component {
     console.log('Constructor Invoked!');
     super();
     this.state = {
-      followers: ["Hello Friends"]
+      users: ["Hello Friends"]
     };
   }
 
   componentDidMount() {
+    // fetch user data
+    fetch('https://api.github.com/users/Shadowborn')
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        this.setState({ users: [response] })
+      })
+      .catch(err => {
+        console.log('Error on user fetch', err)
+      })
+
     // fetch followers data
     fetch('https://api.github.com/users/Shadowborn/followers')
       .then(response => {
         console.log(response, 'Followers response');
         return response.json();
       })
-      .then(followers => {
-        console.log(followers, '2nd then Followers response')
-        this.setState({ followers: followers });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    // fetch user data
-    fetch('https://api.github.com/users/Shadowborn')
       .then(response => {
-        console.log(response, 'User response')
-        return response.json();
-      })
-      .then(user => {
-        const current = this.state.followers
-        this.setState({ followers: [user, ...current] })
+        console.log(response, '2nd then Followers response')
+        this.setState({ users: [...this.state.users, ...response] });
       })
       .catch(error => {
         console.log(error);
@@ -53,7 +51,7 @@ class App extends React.Component {
         </header>
 
         <CardDeck>
-          {this.state.followers.map(user => {
+          {this.state.users.map(user => {
             return <UserCard key={user.id} user={user} />
           })}
         </CardDeck>

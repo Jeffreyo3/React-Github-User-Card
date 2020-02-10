@@ -8,10 +8,9 @@ import {
     Button
   } from "shards-react";
 
-  
 
 
-function UserCard(props) {
+const UserCard = (props) => {
     return (
         <Card className="user-card" style={{width: '250px', flex: 'auto'}}>
             <CardHeader>
