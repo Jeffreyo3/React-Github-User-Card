@@ -10,13 +10,14 @@ class App extends React.Component {
     super();
     // set state. State can be mutated in class components
     this.state = {
+      user: "Shadowborn",
       users: ["Hello Friends"]
     };
   }
 
   componentDidMount() {
     // fetch user data
-    fetch('https://api.github.com/users/Shadowborn')
+    fetch(`https://api.github.com/users/${this.state.user}`)
       .then(response => {
         return response.json();
       })
@@ -32,7 +33,7 @@ class App extends React.Component {
       })
 
     // fetch followers data
-    fetch('https://api.github.com/users/Shadowborn/followers')
+    fetch(`https://api.github.com/users/${this.state.user}/followers`)
       .then(response => {
         console.log(response, 'Followers response');
         return response.json();
@@ -55,7 +56,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 id="header">Shadowborn's followers</h1>
+          <h1 id="header">{this.state.users[0].login}'s GitHub</h1>
         </header>
 
         <CardDeck>
