@@ -9,7 +9,7 @@ import {
   } from "shards-react";
 
 
-
+// No need to use a class component if the component is simply 'reading' props
 const UserCard = (props) => {
     return (
         <Card className="user-card" style={{width: '250px', flex: 'auto'}}>
