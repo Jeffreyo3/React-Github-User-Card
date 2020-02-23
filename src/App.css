@@ -1,0 +1,25 @@
+
+
+.App-header {
+  background-color: #282c34;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.user-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+img {
+  width: 100%;
+}
+
+#header{
+  color: rgba(23, 161, 161, 0.863);
+}
